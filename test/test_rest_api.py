@@ -19,7 +19,7 @@ def test_service_health():
 
 
 def test_service_handle_audio_file_less_1_second():
-    request = {'data': [[1 for _ in range(8000)]],
+    request = {'data': [[1 for _ in range(7999)]],
                'sample_rate': 8000}
 
     with TestClient(app) as client:
