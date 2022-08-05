@@ -1,4 +1,3 @@
-import numpy as np
 import pytest
 
 from fastapi.testclient import TestClient
@@ -20,7 +19,7 @@ def test_service_health():
 
 
 def test_service_handle_audio_file_less_1_second():
-    request = {'data': np.ones((1, 7999)).tolist(),
+    request = {'data': [[1 for _ in range(8000)]],
                'sample_rate': 8000}
 
     with TestClient(app) as client:
@@ -30,7 +29,7 @@ def test_service_handle_audio_file_less_1_second():
 
 
 def test_service_handle_audio_file_more_60_second():
-    request = {'data': np.ones((1, 60 *  8000 + 1)).tolist(),
+    request = {'data': [[1 for _ in range(60 * 8000 + 1)]],
                'sample_rate': 8000}
 
     with TestClient(app) as client:
@@ -40,7 +39,7 @@ def test_service_handle_audio_file_more_60_second():
 
 
 def test_service_can_predict():
-    request = {'data': np.ones((1, 10 * 24000 + 1)).tolist(),
+    request = {'data': [[1 for _ in range(10 * 24000)]],
                'sample_rate': 24000}
 
     with TestClient(app) as client:
